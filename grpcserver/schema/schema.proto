@@ -1,0 +1,19 @@
+syntax = "proto3";
+option go_package = "./grpcserver";
+
+service AppticaService {
+  rpc AppTopCategories(AppTopCategoryRequest) returns(AppTopCategoryResponse);
+}
+
+message AppTopCategoryRequest {
+  string date = 1;
+}
+
+message Row {
+  string categoryId = 1;
+  int32 position = 2;
+}
+
+message AppTopCategoryResponse {
+  repeated Row data = 1;
+}
