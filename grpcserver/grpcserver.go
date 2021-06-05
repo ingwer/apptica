@@ -10,6 +10,7 @@ import (
 	"net"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 const (
@@ -63,6 +64,8 @@ func New(addr string, cmd commander.Commander) *grpc.Server {
 
 	s := grpc.NewServer()
 	RegisterAppticaServiceServer(s, &srv{cmd: cmd})
+	reflection.Register(s)
+
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
